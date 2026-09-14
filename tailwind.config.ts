@@ -39,7 +39,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Poppins", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "Poppins", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         arabic: ["Cairo", "Tajawal", "Inter", "ui-sans-serif", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },

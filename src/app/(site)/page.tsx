@@ -15,6 +15,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+      <ManifesteSection />
       <RangesSection />
       <WhySection />
       <ProcessSection />
@@ -24,6 +25,50 @@ export default async function HomePage() {
       <TestimonialsSection />
     </>
   );
+
+  /* ---------------------------- Manifeste --------------------------- */
+  function ManifesteSection() {
+    const big = locale === "ar"
+      ? "نحن نبني أكثر من مجرد فتحات."
+      : locale === "en"
+        ? "We build more than openings."
+        : "Nous construisons plus que des ouvertures.";
+    const body = locale === "ar"
+      ? "تحوّل كريستالو المغرب الألمنيوم والـ PVC والزجاج إلى حلول معمارية مصممة لتدوم."
+      : locale === "en"
+        ? "Cristalu Maroc turns aluminium, PVC and glass into architectural solutions built to last."
+        : "Cristalu Maroc transforme l'aluminium, le PVC et le verre en solutions architecturales conçues pour durer.";
+
+    return (
+      <section className="relative overflow-hidden bg-white py-24 sm:py-32">
+        {/* technical grid accent */}
+        <div className="pointer-events-none absolute inset-y-0 start-0 hidden w-px bg-ink-900/8 lg:block" style={{ insetInlineStart: "8%" }} aria-hidden />
+        <div className="container-x">
+          <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
+            <div>
+              <p className="m-eyebrow">01 — {locale === "ar" ? "الرؤية" : locale === "en" ? "Vision" : "Manifeste"}</p>
+              <h2 className="m-display mt-6 max-w-4xl text-[clamp(2.2rem,7vw,5.5rem)] text-ink-950">
+                <span className="m-line"><span className="m-line-in">{big}</span></span>
+              </h2>
+            </div>
+
+            {/* red vertical rule */}
+            <div className="hidden w-px bg-brand-600 lg:block" aria-hidden />
+
+            <Reveal delay={120} className="lg:max-w-sm lg:pt-24">
+              <p className="text-[16px] leading-relaxed text-ink-600">{body}</p>
+              <div className="mt-8 flex items-center gap-4">
+                <span className="h-px w-12 bg-brand-600" aria-hidden />
+                <Link href="/about" className="m-link text-[12px] font-bold uppercase tracking-[0.2em] text-ink-950">
+                  {t("nav.about")}
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   /* ----------------------------- Ranges ----------------------------- */
   function RangesSection() {
