@@ -35,6 +35,7 @@ export function Header() {
     { href: "/", label: t("nav.home") },
     { href: "/about", label: t("nav.about") },
     { href: "/products", label: t("nav.products") },
+    { href: "/configurateur", label: locale === "ar" ? "المُهيّئ" : locale === "en" ? "Configurator" : "Configurateur" },
     { href: "/projects", label: t("nav.projects") },
     { href: "/gallery", label: t("nav.gallery") },
     { href: "/news", label: t("nav.news") },
