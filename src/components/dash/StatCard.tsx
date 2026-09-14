@@ -32,10 +32,14 @@ export function StatCard({
   const inner = (
     <div
       className={cn(
-        "group relative overflow-hidden rounded-xl border border-ink-900/8 bg-white p-5 transition-all duration-300",
-        href && "hover:-translate-y-0.5 hover:border-ink-900/15 hover:shadow-card",
+        "group relative overflow-hidden rounded-lg border border-ink-900/10 bg-white p-5 transition-all duration-300",
+        href && "hover:-translate-y-0.5 hover:border-ink-900/20",
       )}
     >
+      <span
+        className="pointer-events-none absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-brand-600 transition-transform duration-300 group-hover:scale-x-100"
+        aria-hidden
+      />
       <div className="flex items-start justify-between gap-3">
         <p className="text-[12px] font-bold uppercase tracking-wider text-ink-400">{label}</p>
         {Icon && (
@@ -87,7 +91,7 @@ export function Card({
   bodyClassName?: string;
 }) {
   return (
-    <div className={cn("rounded-xl border border-ink-900/8 bg-white shadow-card", className)}>
+    <div className={cn("rounded-lg border border-ink-900/10 bg-white shadow-none", className)}>
       {(title || actions) && (
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-900/8 px-5 py-4">
           <div>

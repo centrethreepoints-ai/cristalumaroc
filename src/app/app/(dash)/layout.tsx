@@ -14,7 +14,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const unread = get<{ c: number }>(`SELECT COUNT(*) AS c FROM notifications WHERE read = 0`)?.c ?? 0;
 
   return (
-    <div className="flex min-h-screen bg-ink-50">
+    <div className="dash-shell flex min-h-screen bg-ink-50">
       <Sidebar role={user.role} />
 
       <div className="flex min-w-0 flex-1 flex-col lg:ps-[248px]">

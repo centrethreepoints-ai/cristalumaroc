@@ -15,7 +15,7 @@ export function PageHeader({
   tabs?: { label: string; href: string; active?: boolean; count?: number }[];
 }) {
   return (
-    <div className="mb-6">
+    <div className="mb-6 border-b border-ink-900/10 pb-5">
       {breadcrumb && (
         <nav className="mb-2 flex flex-wrap items-center gap-1.5 text-[11.5px] text-ink-400">
           <Link href="/app/dashboard" className="transition hover:text-ink-700">ERP</Link>
@@ -34,8 +34,11 @@ export function PageHeader({
 
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
-          <h1 className="font-display text-[22px] font-bold tracking-tight text-ink-900 sm:text-[26px]">{title}</h1>
-          {subtitle && <p className="mt-1 text-[13.5px] text-ink-500">{subtitle}</p>}
+          <div className="flex items-center gap-3">
+            <span className="h-6 w-1 shrink-0 bg-brand-600" aria-hidden />
+            <h1 className="font-display text-[22px] font-bold tracking-tight text-ink-900 sm:text-[26px]">{title}</h1>
+          </div>
+          {subtitle && <p className="mt-1 ps-4 text-[13.5px] text-ink-500">{subtitle}</p>}
         </div>
         {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
       </div>

@@ -98,6 +98,28 @@
     @apply rounded-xl border border-white/8 bg-ink-850;
   }
 
+  /* ---------- Dashboard: industrial identity (scoped) ---------- */
+  .dash-shell main {
+    background-image:
+      linear-gradient(to right, rgba(11, 11, 14, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 11, 14, 0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .dash-shell .card {
+    @apply rounded-lg border-ink-900/10 shadow-none;
+  }
+  .dash-shell .card-head {
+    @apply border-ink-900/10;
+  }
+  /* crisp hairline tables, no soft SaaS shadows */
+  .dash-shell .table thead th {
+    @apply bg-white text-ink-500;
+    border-bottom: 1px solid rgba(11, 11, 14, 0.12);
+  }
+  .dash-shell .table tbody td {
+    @apply border-ink-900/8;
+  }
+
   /* ---------- Forms ---------- */
   .label {
     @apply mb-1.5 block text-[13px] font-semibold text-ink-700;
