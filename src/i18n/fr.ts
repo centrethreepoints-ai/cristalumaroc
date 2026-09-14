@@ -547,6 +547,7 @@ export const fr = {
   dash: {
     welcome: "Bonjour",
     subtitle: "Voici l'activité de l'usine en temps réel.",
+    quickAccess: "Accès rapide",
     quoteRequests: "Demandes de devis reçues",
     quoteRequestsSub: "Depuis le site public",
     recentQuotes: "Derniers devis",

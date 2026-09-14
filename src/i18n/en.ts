@@ -232,7 +232,7 @@ export const en: DeepPartial<Dict> = {
     RETURN: "Return", PRODUCTION_CONSUMPTION: "Production consumption",
   },
   dash: {
-    welcome: "Hello", subtitle: "Here is the factory activity in real time.",
+    welcome: "Hello", subtitle: "Here is the factory activity in real time.", quickAccess: "Quick access",
     quoteRequests: "Incoming quote requests", quoteRequestsSub: "From the public website",
     recentQuotes: "Latest quotes", recentOrders: "Latest orders", productionLoad: "Production load",
     alerts: "Alerts", todo: "To handle", lowStockAlerts: "Low stock alerts",

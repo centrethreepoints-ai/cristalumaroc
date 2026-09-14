@@ -433,6 +433,7 @@ export const ar: DeepPartial<Dict> = {
   dash: {
     welcome: "مرحباً",
     subtitle: "هذا هو نشاط المصنع في الوقت الحقيقي.",
+    quickAccess: "وصول سريع",
     quoteRequests: "طلبات عروض السعر الواردة",
     quoteRequestsSub: "من الموقع العمومي",
     recentQuotes: "آخر عروض السعر",

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
-  AlertTriangle, ArrowRight, BadgeDollarSign, Bell, CheckCircle2, ClipboardCheck, Clock,
-  FileText, PackageSearch, Plus, Receipt, ShoppingCart, TrendingUp, TriangleAlert, Wallet,
+  AlertTriangle, ArrowRight, BadgeDollarSign, BarChart3, Bell, Boxes, CheckCircle2, ClipboardCheck,
+  Clock, CreditCard, Factory, FileInput, FileText, KanbanSquare, Package, PackageOpen,
+  PackageSearch, Plus, Receipt, ShoppingCart, TrendingUp, TriangleAlert, Truck, Users, Wallet,
 } from "lucide-react";
 import { getSessionUser, can } from "@/lib/auth";
 import { getI18n } from "@/i18n/server";
@@ -55,6 +56,49 @@ export default async function DashboardPage() {
           </>
         }
       />
+
+      {/* -------------------------- Quick access ------------------------- */}
+      {(() => {
+        const QUICK: { key: any; labelKey: string; href: string; icon: any }[] = [
+          { key: "requests", labelKey: "menu.requests", href: "/app/commercial/requests", icon: FileInput },
+          { key: "customers", labelKey: "menu.customers", href: "/app/commercial/customers", icon: Users },
+          { key: "quotes", labelKey: "menu.quotes", href: "/app/commercial/quotes", icon: FileText },
+          { key: "orders", labelKey: "menu.orders", href: "/app/commercial/orders", icon: ShoppingCart },
+          { key: "manufacturing", labelKey: "menu.manufacturing", href: "/app/production/manufacturing", icon: Factory },
+          { key: "kanban", labelKey: "menu.kanban", href: "/app/production/kanban", icon: KanbanSquare },
+          { key: "inventory", labelKey: "menu.inventory", href: "/app/stock/inventory", icon: Boxes },
+          { key: "products", labelKey: "menu.products", href: "/app/stock/products", icon: Package },
+          { key: "purchase_orders", labelKey: "menu.purchaseOrders", href: "/app/purchasing/orders", icon: Truck },
+          { key: "invoices", labelKey: "menu.invoices", href: "/app/finance/invoices", icon: Receipt },
+          { key: "payments", labelKey: "menu.payments", href: "/app/finance/payments", icon: CreditCard },
+          { key: "deliveries", labelKey: "menu.deliveries", href: "/app/logistics/deliveries", icon: PackageOpen },
+          { key: "reports", labelKey: "menu.reports", href: "/app/reports", icon: BarChart3 },
+        ].filter((m) => can(user.role, m.key as any, "view"));
+
+        if (QUICK.length === 0) return null;
+        return (
+          <div className="mb-6">
+            <p className="mb-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-ink-400">{t("dash.quickAccess")}</p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7">
+              {QUICK.map((m) => {
+                const Icon = m.icon;
+                return (
+                  <Link
+                    key={m.key}
+                    href={m.href}
+                    className="group flex flex-col items-start gap-3 rounded-xl border border-ink-900/8 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-600/40 hover:shadow-card"
+                  >
+                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-ink-900/6 text-ink-700 transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="text-[12.5px] font-semibold leading-tight text-ink-800">{t(m.labelKey)}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* ------------------------------ KPI ------------------------------ */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
