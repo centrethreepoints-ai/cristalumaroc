@@ -199,3 +199,53 @@
   .print-page { break-inside: avoid; }
   @page { size: A4; margin: 12mm; }
 }
+
+/* ===================== MINIMALIST / MOTION SYSTEM ===================== */
+
+/* Line-mask title reveal */
+.m-line{display:block;overflow:hidden;}
+.m-line-in{display:block;transform:translateY(112%);animation:mm-line .9s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes mm-line{to{transform:translateY(0);}}
+
+/* Infinite marquee strip */
+.m-marquee{overflow:hidden;position:relative;}
+.m-marquee-track{display:flex;width:max-content;animation:mm-marquee 30s linear infinite;}
+.m-marquee:hover .m-marquee-track{animation-play-state:paused;}
+@keyframes mm-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+[dir="rtl"] .m-marquee-track{animation-direction:reverse;}
+
+/* Ken Burns breathing image */
+.m-kb{overflow:hidden;}
+.m-kb img{animation:mm-kb 16s ease-in-out infinite alternate;will-change:transform;}
+@keyframes mm-kb{from{transform:scale(1);}to{transform:scale(1.09);}}
+
+/* Underline sweep link */
+.m-link{position:relative;}
+.m-link::after{content:"";position:absolute;inset-inline-start:0;bottom:-2px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:var(--m-origin,left);transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.m-link:hover::after,.m-link:focus-visible::after{transform:scaleX(1);}
+[dir="rtl"] .m-link::after{--m-origin:right;}
+
+/* Hairline helpers */
+.m-hair{border-color:rgb(11 11 14 / .1);}
+.m-eyebrow{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--brand-600,#E30613);}
+
+/* Huge display numerals / titles */
+.m-display{font-family:var(--font-display,Inter,sans-serif);font-weight:800;letter-spacing:-.03em;line-height:.95;}
+
+/* Reveal variants */
+.reveal[data-v="left"]{transform:translateX(-36px);}
+.reveal[data-v="right"]{transform:translateX(36px);}
+.reveal[data-v="scale"]{transform:scale(.94);}
+.reveal[data-v="blur"]{filter:blur(10px);}
+.reveal.in{opacity:1;transform:none;filter:none;}
+
+/* Slow vertical float for accent marks */
+.m-float{animation:mm-float 6s ease-in-out infinite;}
+@keyframes mm-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+@media (prefers-reduced-motion: reduce){
+  .m-line-in{transform:none;animation:none;}
+  .m-marquee-track{animation:none;}
+  .m-kb img{animation:none;}
+  .m-float{animation:none;}
+}
