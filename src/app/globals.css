@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #e30613;
+  --brand-dark: #bf0410;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white text-ink-900 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  }
+  [dir="rtl"] body {
+    font-family: Cairo, Tajawal, Inter, sans-serif;
+  }
+  [dir="rtl"] .font-display {
+    font-family: Cairo, Poppins, sans-serif;
+  }
+  h1, h2, h3, h4, h5 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--brand);
+    color: #fff;
+  }
+  input, select, textarea, button {
+    font-family: inherit;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1320px] px-4 sm:px-6 lg:px-8;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold
+           transition-all duration-200 disabled:pointer-events-none disabled:opacity-50;
+    padding: 0.6rem 1.1rem;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 text-white shadow-[0_8px_24px_-10px_rgba(227,6,19,.8)] hover:bg-brand-700 hover:shadow-[0_12px_30px_-10px_rgba(227,6,19,.9)] active:scale-[.98];
+  }
+  .btn-dark {
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 active:scale-[.98];
+  }
+  .btn-outline {
+    @apply btn border border-ink-900/15 bg-white text-ink-800 hover:border-ink-900/30 hover:bg-ink-50 active:scale-[.98];
+  }
+  .btn-outline-light {
+    @apply btn border border-white/25 bg-white/5 text-white backdrop-blur hover:border-white/50 hover:bg-white/10;
+  }
+  .btn-ghost {
+    @apply btn text-ink-600 hover:bg-ink-900/5 hover:text-ink-900;
+  }
+  .btn-sm {
+    padding: 0.375rem 0.7rem;
+    font-size: 0.8125rem;
+  }
+  .btn-lg {
+    padding: 0.85rem 1.6rem;
+    font-size: 0.9375rem;
+  }
+  .btn-icon {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg text-ink-400 transition hover:bg-ink-900/5 hover:text-ink-900;
+  }
+
+  /* ---------- Surfaces ---------- */
+  .card {
+    @apply rounded-xl border border-ink-900/8 bg-white shadow-card;
+  }
+  .card-pad {
+    @apply p-5;
+  }
+  .card-head {
+    @apply flex flex-wrap items-center justify-between gap-3 border-b border-ink-900/8 px-5 py-4;
+  }
+  .panel-dark {
+    @apply rounded-xl border border-white/8 bg-ink-850;
+  }
+
+  /* ---------- Dashboard: industrial identity (scoped) ---------- */
+  .dash-shell main {
+    background-image:
+      linear-gradient(to right, rgba(11, 11, 14, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 11, 14, 0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .dash-shell .card {
+    @apply rounded-lg border-ink-900/10 shadow-none;
+  }
+  .dash-shell .card-head {
+    @apply border-ink-900/10;
+  }
+  /* crisp hairline tables, no soft SaaS shadows */
+  .dash-shell .table thead th {
+    @apply bg-white text-ink-500;
+    border-bottom: 1px solid rgba(11, 11, 14, 0.12);
+  }
+  .dash-shell .table tbody td {
+    @apply border-ink-900/8;
+  }
+
+  /* ---------- Forms ---------- */
+  .label {
+    @apply mb-1.5 block text-[13px] font-semibold text-ink-700;
+  }
+  .input {
+    @apply w-full rounded-lg border border-ink-900/12 bg-white px-3 py-2 text-sm text-ink-900 outline-none transition
+           placeholder:text-ink-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-600/10 disabled:bg-ink-50 disabled:text-ink-400;
+  }
+  .input-dark {
+    @apply w-full rounded-lg border border-white/10 bg-ink-800 px-3 py-2 text-sm text-white outline-none transition
+           placeholder:text-ink-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15;
+  }
+  .select {
+    @apply input appearance-none pr-9;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2355555F' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    background-size: 16px 16px;
+  }
+  [dir="rtl"] .select {
+    @apply pl-9 pr-3;
+    background-position: left 0.6rem center;
+  }
+  .field-error {
+    @apply mt-1 text-xs font-medium text-brand-600;
+  }
+
+  /* ---------- Table ---------- */
+  .table-wrap {
+    @apply w-full overflow-x-auto;
+  }
+  .table {
+    @apply w-full min-w-full border-collapse text-sm;
+  }
+  .table thead th {
+    @apply sticky top-0 z-10 whitespace-nowrap border-b border-ink-900/8 bg-ink-50 px-4 py-2.5 text-start
+           text-[11px] font-bold uppercase tracking-wider text-ink-500;
+  }
+  .table tbody td {
+    @apply whitespace-nowrap border-b border-ink-900/5 px-4 py-3 align-middle text-ink-700;
+  }
+  .table tbody tr {
+    @apply transition-colors hover:bg-brand-600/[.035];
+  }
+
+  /* ---------- Badges ---------- */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide;
+  }
+  .badge-grey { @apply badge bg-ink-900/6 text-ink-600; }
+  .badge-red { @apply badge bg-brand-600/10 text-brand-700; }
+  .badge-green { @apply badge bg-emerald-500/12 text-emerald-700; }
+  .badge-amber { @apply badge bg-amber-500/14 text-amber-700; }
+  .badge-blue { @apply badge bg-sky-500/12 text-sky-700; }
+  .badge-violet { @apply badge bg-violet-500/12 text-violet-700; }
+
+  .kpi-value {
+    @apply font-display text-[26px] font-bold leading-none tracking-tight text-ink-900;
+  }
+  .section-title {
+    @apply font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.08];
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-600;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:h-px after:w-0 after:bg-brand-600 after:transition-all hover:after:w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+  .scroll-thin::-webkit-scrollbar-track { background: transparent; }
+  .scroll-thin::-webkit-scrollbar-thumb { background: rgba(120, 120, 135, .35); border-radius: 8px; }
+  .scroll-thin::-webkit-scrollbar-thumb:hover { background: rgba(120, 120, 135, .6); }
+  .glass { backdrop-filter: blur(16px) saturate(160%); }
+  .mask-fade-r { mask-image: linear-gradient(to right, #000 80%, transparent); }
+  .tnum { font-variant-numeric: tabular-nums; }
+}
+
+/* ---------- Animations ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------- Print (PDF via browser) ---------- */
+@media print {
+  .no-print, .no-print * { display: none !important; }
+  body { background: #fff !important; }
+  .print-doc { position: static !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: 0 !important; }
+  .print-page { break-inside: avoid; }
+  @page { size: A4; margin: 12mm; }
+}
+
+/* ===================== MINIMALIST / MOTION SYSTEM ===================== */
+
+/* Line-mask title reveal */
+.m-line{display:block;overflow:hidden;}
+.m-line-in{display:block;transform:translateY(112%);animation:mm-line .9s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes mm-line{to{transform:translateY(0);}}
+
+/* Infinite marquee strip */
+.m-marquee{overflow:hidden;position:relative;}
+.m-marquee-track{display:flex;width:max-content;animation:mm-marquee 30s linear infinite;}
+.m-marquee:hover .m-marquee-track{animation-play-state:paused;}
+@keyframes mm-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+[dir="rtl"] .m-marquee-track{animation-direction:reverse;}
+
+/* Ken Burns breathing image */
+.m-kb{overflow:hidden;}
+.m-kb img{animation:mm-kb 16s ease-in-out infinite alternate;will-change:transform;}
+@keyframes mm-kb{from{transform:scale(1);}to{transform:scale(1.09);}}
+
+/* Underline sweep link */
+.m-link{position:relative;}
+.m-link::after{content:"";position:absolute;inset-inline-start:0;bottom:-2px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:var(--m-origin,left);transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.m-link:hover::after,.m-link:focus-visible::after{transform:scaleX(1);}
+[dir="rtl"] .m-link::after{--m-origin:right;}
+
+/* Hairline helpers */
+.m-hair{border-color:rgb(11 11 14 / .1);}
+.m-eyebrow{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--brand-600,#E30613);}
+
+/* Huge display numerals / titles */
+.m-display{font-family:var(--font-display,"Space Grotesk",Inter,sans-serif);font-weight:700;letter-spacing:-.03em;line-height:.95;}
+[dir="rtl"] .m-display{font-family:Cairo,"Space Grotesk",sans-serif;}
+
+/* Reveal variants */
+.reveal[data-v="left"]{transform:translateX(-36px);}
+.reveal[data-v="right"]{transform:translateX(36px);}
+.reveal[data-v="scale"]{transform:scale(.94);}
+.reveal[data-v="blur"]{filter:blur(10px);}
+.reveal.in{opacity:1;transform:none;filter:none;}
+
+/* Slow vertical float for accent marks */
+.m-float{animation:mm-float 6s ease-in-out infinite;}
+@keyframes mm-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+@media (prefers-reduced-motion: reduce){
+  .m-line-in{transform:none;animation:none;}
+  .m-marquee-track{animation:none;}
+  .m-kb img{animation:none;}
+  .m-float{animation:none;}
+}
