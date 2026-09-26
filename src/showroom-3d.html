@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!--HEAD-->
+<title>Showroom 3D — Explorez nos menuiseries | CRISTALU MAROC</title>
+<meta name="description" content="Showroom virtuel 3D Cristalu Maroc : explorez nos fenêtres, portes, baies vitrées et pergolas aluminium et PVC sous tous les angles.">
+</head>
+<body>
+<!--HEADER-->
+<main class="sr">
+  <div id="showroom3d"></div>
+  <div class="sr-info">
+    <span class="eyebrow">Showroom 3D</span>
+    <h1 class="h-lg" style="margin:.8rem 0" id="sr-title">Fenêtre</h1>
+    <p class="lead" id="sr-desc"></p>
+  </div>
+  <div class="sr-ui">
+    <div class="sr-models" id="models"></div>
+    <div class="sr-colors" id="colors"></div>
+    <a class="btn btn-accent" id="cfg-link" href="configurateur.html">Configurer ce produit <span class="arr">→</span></a>
+  </div>
+</main>
+<script type="module">
+  import { CATALOG } from './assets/js/config/catalog.js';
+  import { createViewer, buildProduct } from './assets/js/engine/viewer.js';
+  const DESC = {
+    fenetre: 'Profilés à rupture de pont thermique, double vitrage et quincaillerie invisible.',
+    porte: 'Porte d’entrée sécurisée, multipoints, panneau décoratif et imposte vitrée.',
+    baie: 'Coulissant grand format sur rails encastrés, lignes ultra-fines.',
+    murrideau: 'Façade vitrée structurelle à grille aluminium pour le tertiaire.',
+    pergola: 'Pergola bioclimatique : lames orientables motorisées (animées ici).',
+  };
+  const v = await createViewer(document.getElementById('showroom3d'), { background: '#0b0c0d', controls: true, autoRotate: true, zoom: true, camera: [2.6, 0.6, 3.8] });
+  let finish = '#2b2d30', type = 'fenetre';
+  const show = () => {
+    const t = CATALOG.types.find(x => x.id === type);
+    t.model ? v.loadModel(t.model) : v.setProduct(buildProduct({ type, width: t.w[2], height: t.h[2], leaves: t.leaves.at(-1) > 2 ? 2 : t.leaves[0] === 1 && type !== 'fenetre' ? 1 : 2, finish }));
+    document.getElementById('sr-title').textContent = t.label;
+    document.getElementById('sr-desc').textContent = DESC[type];
+    document.getElementById('cfg-link').href = 'configurateur.html?type=' + type;
+    document.querySelectorAll('#models button').forEach(b => b.classList.toggle('on', b.dataset.id === type));
+  };
+  document.getElementById('models').innerHTML = CATALOG.types.map(t => `<button data-id="${t.id}">${t.label}</button>`).join('');
+  document.getElementById('colors').innerHTML = CATALOG.finishes.map((f, i) => `<button title="${f.label}" data-hex="${f.hex}" class="${i ? '' : 'on'}" style="background:${f.hex}"></button>`).join('');
+  document.querySelectorAll('#models button').forEach(b => b.onclick = () => { type = b.dataset.id; show(); });
+  document.querySelectorAll('#colors button').forEach(b => b.onclick = () => { finish = b.dataset.hex; v.setFinish(finish); document.querySelectorAll('#colors button').forEach(x => x.classList.toggle('on', x === b)); });
+  show();
+</script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

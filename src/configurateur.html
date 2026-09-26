@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!--HEAD-->
+<title>Configurateur 3D — Fenêtres, portes &amp; baies sur mesure | CRISTALU MAROC</title>
+<meta name="description" content="Configurez votre fenêtre, porte, baie vitrée ou pergola aluminium / PVC en 3D et obtenez une estimation instantanée. Cristalu Maroc, Kénitra.">
+</head>
+<body>
+<!--HEADER-->
+<main class="cfg">
+  <div class="cfg-stage" id="cfg3d">
+    <span class="stage-tag" style="z-index:2">Aperçu 3D temps réel</span>
+    <span class="cfg-dims" id="dims"></span>
+  </div>
+  <div class="cfg-panel">
+    <span class="eyebrow">Configurateur</span>
+    <h1 class="h-lg" style="margin:.8rem 0 .6rem">Créez votre menuiserie.</h1>
+    <p class="lead">Estimation indicative. Un conseiller valide chaque configuration après visite technique.</p>
+    <div id="steps"></div>
+    <div class="cfg-total">
+      <div><small style="color:var(--alu-2);letter-spacing:.14em;text-transform:uppercase;font-size:.7rem">Estimation à partir de</small><br><b id="price">—</b> <span>MAD TTC</span></div>
+      <button class="btn btn-accent" id="send">Demander un devis <span class="arr">→</span></button>
+    </div>
+  </div>
+</main>
+<!--FOOTER-->
+<script type="module">
+  import { CATALOG, estimate } from './assets/js/config/catalog.js';
+  import { createViewer, buildProduct } from './assets/js/engine/viewer.js';
+
+  const q = new URLSearchParams(location.search);
+  const state = { type: q.get('type') || 'fenetre', material: q.get('mat') || 'alu', finish: 'anthracite', glazing: 'dv', leaves: 2, width: 1.2, height: 1.3 };
+  const listeners = new Set();
+  const set = patch => { Object.assign(state, patch); listeners.forEach(fn => fn(state)); };
+
+  const steps = document.getElementById('steps');
+  const typeDef = () => CATALOG.types.find(t => t.id === state.type);
+  function render() {
+    const t = typeDef();
+    if (!t.leaves.includes(state.leaves)) state.leaves = t.leaves[0];
+    state.width = Math.min(Math.max(state.width, t.w[0]), t.w[1]);
+    state.height = Math.min(Math.max(state.height, t.h[0]), t.h[1]);
+    const opt = (key, items, fmt = i => i.label) => items.map(i => `<button class="opt ${state[key] == (i.id ?? i) ? 'on' : ''}" data-k="${key}" data-v="${i.id ?? i}">${fmt(i)}</button>`).join('');
+    steps.innerHTML = `
+      <div class="cfg-step"><h3><i>01</i>Produit</h3><div class="opts">${opt('type', CATALOG.types)}</div></div>
+      <div class="cfg-step"><h3><i>02</i>Matériau</h3><div class="opts">${opt('material', CATALOG.materials)}</div></div>
+      <div class="cfg-step"><h3><i>03</i>Dimensions</h3>
+        <div class="range"><span>Largeur</span><input type="range" id="w" min="${t.w[0]}" max="${t.w[1]}" step="0.05" value="${state.width}"><output>${state.width.toFixed(2)} m</output></div>
+        <div class="range" style="margin-top:.8rem"><span>Hauteur</span><input type="range" id="h" min="${t.h[0]}" max="${t.h[1]}" step="0.05" value="${state.height}"><output>${state.height.toFixed(2)} m</output></div>
+      </div>
+      ${t.leaves.length > 1 ? `<div class="cfg-step"><h3><i>04</i>Vantaux</h3><div class="opts">${opt('leaves', t.leaves, n => n + (n > 1 ? ' vantaux' : ' vantail'))}</div></div>` : ''}
+      <div class="cfg-step"><h3><i>05</i>Finition</h3><div class="opts">${opt('finish', CATALOG.finishes, f => `<span class="swatch"><i style="background:${f.hex}"></i>${f.label}</span>`)}</div></div>
+      <div class="cfg-step"><h3><i>06</i>Vitrage</h3><div class="opts">${opt('glazing', CATALOG.glazing)}</div></div>`;
+    steps.querySelectorAll('.opt').forEach(b => b.onclick = () => { const v = b.dataset.v; set({ [b.dataset.k]: isNaN(v) ? v : +v }); render(); });
+    ['w', 'h'].forEach(id => { const el = document.getElementById(id); el.oninput = () => { el.nextElementSibling.textContent = (+el.value).toFixed(2) + ' m'; set({ [id === 'w' ? 'width' : 'height']: +el.value }); }; });
+    listeners.forEach(fn => fn(state));
+  }
+
+  listeners.add(s => {
+    document.getElementById('price').textContent = estimate(s).toLocaleString('fr-MA');
+    document.getElementById('dims').textContent = `${typeDef().label} · ${s.width.toFixed(2)} × ${s.height.toFixed(2)} m`;
+  });
+
+  const viewer = await createViewer(document.getElementById('cfg3d'), { controls: true, autoRotate: false, zoom: true, camera: [1.6, 0.3, 3.6] }).catch(e => (console.warn(e), null));
+  let last = '';
+  listeners.add(s => {
+    if (!viewer) return;
+    const hex = CATALOG.finishes.find(f => f.id === s.finish).hex;
+    const key = [s.type, s.leaves, s.width, s.height].join();
+    const t = typeDef();
+    if (key !== last) { last = key; t.model ? viewer.loadModel(t.model) : viewer.setProduct(buildProduct({ type: s.type, width: s.width, height: s.height, leaves: s.leaves, finish: hex, profile: s.material === 'pvc' ? 0.09 : 0.06 })); }
+    viewer.setFinish(hex);
+  });
+
+  document.getElementById('send').onclick = () => {
+    const t = typeDef(), f = CATALOG.finishes.find(x => x.id === state.finish), g = CATALOG.glazing.find(x => x.id === state.glazing);
+    const msg = `Bonjour Cristalu Maroc, je souhaite un devis :%0A${t.label} ${state.material.toUpperCase()} — ${state.width.toFixed(2)} × ${state.height.toFixed(2)} m, ${state.leaves} vantail(x)%0AFinition : ${f.label}%0AVitrage : ${g.label}%0AEstimation : ${estimate(state)} MAD`;
+    window.open(`https://wa.me/212661239493?text=${msg}`, '_blank');
+  };
+  render();
+</script>
+</body>
+</html>

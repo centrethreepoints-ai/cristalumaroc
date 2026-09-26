@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0c0d">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+
+<title>Configurateur 3D — Fenêtres, portes &amp; baies sur mesure | CRISTALU MAROC</title>
+<meta name="description" content="Configurez votre fenêtre, porte, baie vitrée ou pergola aluminium / PVC en 3D et obtenez une estimation instantanée. Cristalu Maroc, Kénitra.">
+</head>
+<body>
+<div class="loader" aria-hidden="true"><div style="text-align:center;color:#fff"><div class="logo" style="justify-content:center"><svg viewBox="0 0 60 40" aria-hidden="true"><path d="M26 4H6v32h20v-7H13V11h13z" fill="#fff"/><path d="M30 4h24L42 20l12 16H30l12-16z" fill="#fff" opacity=".0"/><path d="M29 8l18 12-18 12z" fill="#d3202a"/><path d="M40 4h14v7H45zM40 36h14v-7H45z" fill="#fff"/></svg><span>CRISTALU<small>MAROC</small></span></div><div class="loader-bar"><i></i></div></div></div>
+<div class="cursor" aria-hidden="true"></div>
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo" aria-label="Cristalu Maroc — accueil"><svg viewBox="0 0 60 40" aria-hidden="true"><path d="M26 4H6v32h20v-7H13V11h13z" fill="#fff"/><path d="M30 4h24L42 20l12 16H30l12-16z" fill="#fff" opacity=".0"/><path d="M29 8l18 12-18 12z" fill="#d3202a"/><path d="M40 4h14v7H45zM40 36h14v-7H45z" fill="#fff"/></svg><span>CRISTALU<small>MAROC</small></span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#apropos">À propos</a>
+      <a href="index.html#produits">Produits</a>
+      <a href="index.html#solutions">Solutions</a>
+      <a href="index.html#realisations">Réalisations</a>
+      <a href="showroom-3d.html">Showroom 3D</a>
+      <a href="configurateur.html">Configurateur</a>
+      <a href="index.html#blog">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="index.html#devis" class="btn btn-accent">Devis gratuit</a>
+      <button class="burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="cfg">
+  <div class="cfg-stage" id="cfg3d">
+    <span class="stage-tag" style="z-index:2">Aperçu 3D temps réel</span>
+    <span class="cfg-dims" id="dims"></span>
+  </div>
+  <div class="cfg-panel">
+    <span class="eyebrow">Configurateur</span>
+    <h1 class="h-lg" style="margin:.8rem 0 .6rem">Créez votre menuiserie.</h1>
+    <p class="lead">Estimation indicative. Un conseiller valide chaque configuration après visite technique.</p>
+    <div id="steps"></div>
+    <div class="cfg-total">
+      <div><small style="color:var(--alu-2);letter-spacing:.14em;text-transform:uppercase;font-size:.7rem">Estimation à partir de</small><br><b id="price">—</b> <span>MAD TTC</span></div>
+      <button class="btn btn-accent" id="send">Demander un devis <span class="arr">→</span></button>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo"><svg viewBox="0 0 60 40" aria-hidden="true"><path d="M26 4H6v32h20v-7H13V11h13z" fill="#fff"/><path d="M30 4h24L42 20l12 16H30l12-16z" fill="#fff" opacity=".0"/><path d="M29 8l18 12-18 12z" fill="#d3202a"/><path d="M40 4h14v7H45zM40 36h14v-7H45z" fill="#fff"/></svg><span>CRISTALU<small>MAROC</small></span></a>
+        <p style="margin-top:1.4rem;max-width:34ch">Menuiserie aluminium &amp; PVC haut de gamme. Conception, fabrication et pose sur mesure à Kénitra et partout au Maroc.</p>
+      </div>
+      <div><h4>Produits</h4><ul>
+        <li><a href="index.html#produits">Fenêtres PVC</a></li><li><a href="index.html#produits">Fenêtres aluminium</a></li><li><a href="index.html#produits">Baies vitrées</a></li><li><a href="index.html#produits">Pergolas</a></li><li><a href="index.html#produits">Momo Box</a></li></ul></div>
+      <div><h4>Explorer</h4><ul>
+        <li><a href="showroom-3d.html">Showroom 3D</a></li><li><a href="configurateur.html">Configurateur</a></li><li><a href="index.html#realisations">Réalisations</a></li><li><a href="index.html#blog">Blog</a></li><li><a href="index.html#devis">Devis</a></li></ul></div>
+      <div><h4>Contact</h4><ul>
+        <li>Kénitra, Maroc</li><li><a href="tel:+212661239493">+212 661 23 94 93</a></li><li><a href="tel:+212666663343">+212 666 66 33 43</a></li><li><a href="mailto:cristalunord@gmail.com">cristalunord@gmail.com</a></li></ul></div>
+    </div>
+    <div class="footer-big" aria-hidden="true">CRISTALU MAROC</div>
+    <div class="footer-bottom"><span>© <span data-year></span> Cristalu Maroc — Tous droits réservés.</span><span>Aluminium · PVC · Verre</span></div>
+  </div>
+</footer>
+<a class="wa" href="https://wa.me/212661239493" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg></a>
+<script src="assets/js/main.js" defer></script>
+
+<script type="module">
+  import { CATALOG, estimate } from './assets/js/config/catalog.js';
+  import { createViewer, buildProduct } from './assets/js/engine/viewer.js';
+
+  const q = new URLSearchParams(location.search);
+  const state = { type: q.get('type') || 'fenetre', material: q.get('mat') || 'alu', finish: 'anthracite', glazing: 'dv', leaves: 2, width: 1.2, height: 1.3 };
+  const listeners = new Set();
+  const set = patch => { Object.assign(state, patch); listeners.forEach(fn => fn(state)); };
+
+  const steps = document.getElementById('steps');
+  const typeDef = () => CATALOG.types.find(t => t.id === state.type);
+  function render() {
+    const t = typeDef();
+    if (!t.leaves.includes(state.leaves)) state.leaves = t.leaves[0];
+    state.width = Math.min(Math.max(state.width, t.w[0]), t.w[1]);
+    state.height = Math.min(Math.max(state.height, t.h[0]), t.h[1]);
+    const opt = (key, items, fmt = i => i.label) => items.map(i => `<button class="opt ${state[key] == (i.id ?? i) ? 'on' : ''}" data-k="${key}" data-v="${i.id ?? i}">${fmt(i)}</button>`).join('');
+    steps.innerHTML = `
+      <div class="cfg-step"><h3><i>01</i>Produit</h3><div class="opts">${opt('type', CATALOG.types)}</div></div>
+      <div class="cfg-step"><h3><i>02</i>Matériau</h3><div class="opts">${opt('material', CATALOG.materials)}</div></div>
+      <div class="cfg-step"><h3><i>03</i>Dimensions</h3>
+        <div class="range"><span>Largeur</span><input type="range" id="w" min="${t.w[0]}" max="${t.w[1]}" step="0.05" value="${state.width}"><output>${state.width.toFixed(2)} m</output></div>
+        <div class="range" style="margin-top:.8rem"><span>Hauteur</span><input type="range" id="h" min="${t.h[0]}" max="${t.h[1]}" step="0.05" value="${state.height}"><output>${state.height.toFixed(2)} m</output></div>
+      </div>
+      ${t.leaves.length > 1 ? `<div class="cfg-step"><h3><i>04</i>Vantaux</h3><div class="opts">${opt('leaves', t.leaves, n => n + (n > 1 ? ' vantaux' : ' vantail'))}</div></div>` : ''}
+      <div class="cfg-step"><h3><i>05</i>Finition</h3><div class="opts">${opt('finish', CATALOG.finishes, f => `<span class="swatch"><i style="background:${f.hex}"></i>${f.label}</span>`)}</div></div>
+      <div class="cfg-step"><h3><i>06</i>Vitrage</h3><div class="opts">${opt('glazing', CATALOG.glazing)}</div></div>`;
+    steps.querySelectorAll('.opt').forEach(b => b.onclick = () => { const v = b.dataset.v; set({ [b.dataset.k]: isNaN(v) ? v : +v }); render(); });
+    ['w', 'h'].forEach(id => { const el = document.getElementById(id); el.oninput = () => { el.nextElementSibling.textContent = (+el.value).toFixed(2) + ' m'; set({ [id === 'w' ? 'width' : 'height']: +el.value }); }; });
+    listeners.forEach(fn => fn(state));
+  }
+
+  listeners.add(s => {
+    document.getElementById('price').textContent = estimate(s).toLocaleString('fr-MA');
+    document.getElementById('dims').textContent = `${typeDef().label} · ${s.width.toFixed(2)} × ${s.height.toFixed(2)} m`;
+  });
+
+  const viewer = await createViewer(document.getElementById('cfg3d'), { controls: true, autoRotate: false, zoom: true, camera: [1.6, 0.3, 3.6] }).catch(e => (console.warn(e), null));
+  let last = '';
+  listeners.add(s => {
+    if (!viewer) return;
+    const hex = CATALOG.finishes.find(f => f.id === s.finish).hex;
+    const key = [s.type, s.leaves, s.width, s.height].join();
+    const t = typeDef();
+    if (key !== last) { last = key; t.model ? viewer.loadModel(t.model) : viewer.setProduct(buildProduct({ type: s.type, width: s.width, height: s.height, leaves: s.leaves, finish: hex, profile: s.material === 'pvc' ? 0.09 : 0.06 })); }
+    viewer.setFinish(hex);
+  });
+
+  document.getElementById('send').onclick = () => {
+    const t = typeDef(), f = CATALOG.finishes.find(x => x.id === state.finish), g = CATALOG.glazing.find(x => x.id === state.glazing);
+    const msg = `Bonjour Cristalu Maroc, je souhaite un devis :%0A${t.label} ${state.material.toUpperCase()} — ${state.width.toFixed(2)} × ${state.height.toFixed(2)} m, ${state.leaves} vantail(x)%0AFinition : ${f.label}%0AVitrage : ${g.label}%0AEstimation : ${estimate(state)} MAD`;
+    window.open(`https://wa.me/212661239493?text=${msg}`, '_blank');
+  };
+  render();
+</script>
+</body>
+</html>
