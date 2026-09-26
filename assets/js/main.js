@@ -143,3 +143,13 @@ if (matchMedia('(hover:hover)').matches) $$('.product').forEach(c => {
   c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; img.style.transform = `scale(.97) perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`; });
   c.addEventListener('mouseleave', () => img.style.transform = '');
 });
+
+/* ===== Sélecteur de design + suivi d'image (liste produits) ===== */
+document.body.insertAdjacentHTML('beforeend', '<div class="design-switch" role="group" aria-label="Design"><button data-d="noir">Noir</button><button data-d="minimal">Minimal</button></div>');
+const syncSwitch = () => $$('.design-switch button').forEach(b => b.classList.toggle('on', b.dataset.d === (document.documentElement.classList.contains('theme-noir') ? 'noir' : 'minimal')));
+$$('.design-switch button').forEach(b => b.onclick = () => { document.documentElement.classList.toggle('theme-noir', b.dataset.d === 'noir'); localStorage.setItem('design', b.dataset.d); syncSwitch(); });
+syncSwitch();
+$$('.product').forEach(c => c.addEventListener('mousemove', e => {
+  if (!document.documentElement.classList.contains('theme-noir')) return;
+  const img = c.querySelector('img,.pattern'); img.style.left = e.clientX + 'px'; img.style.top = e.clientY + 'px';
+}));
