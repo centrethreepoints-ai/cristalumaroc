@@ -103,7 +103,7 @@ export async function createViewer(container, opts = {}) {
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
   camera.position.set(...o.camera);
   const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(3, 4, 3); key.castShadow = true; scene.add(key);
-  const rim = new THREE.DirectionalLight(0xff4a52, 0.9); rim.position.set(-3, 1, -2); scene.add(rim);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.6); rim.position.set(-3, 1, -2); scene.add(rim);
 
   const ground = new THREE.Mesh(new THREE.CircleGeometry(4, 64), new THREE.ShadowMaterial({ opacity: 0.25 }));
   ground.rotation.x = -Math.PI / 2; ground.position.y = -0.95; ground.receiveShadow = true; scene.add(ground);

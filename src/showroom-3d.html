@@ -5,19 +5,19 @@
 <title>Showroom 3D — Explorez nos menuiseries | CRISTALU MAROC</title>
 <meta name="description" content="Showroom virtuel 3D Cristalu Maroc : explorez nos fenêtres, portes, baies vitrées et pergolas aluminium et PVC sous tous les angles.">
 </head>
-<body class="dark-page">
+<body>
 <!--HEADER-->
 <main class="sr">
   <div id="showroom3d"></div>
   <div class="sr-info">
-    <span class="eyebrow">Showroom 3D</span>
-    <h1 class="h-lg" style="margin:.8rem 0" id="sr-title">Fenêtre</h1>
-    <p class="lead" id="sr-desc"></p>
+    <span class="label">Showroom 3D</span>
+    <h1 class="t-h2" style="margin:.8rem 0" id="sr-title">Fenêtre</h1>
+    <p class="text" id="sr-desc"></p>
   </div>
   <div class="sr-ui">
     <div class="sr-models" id="models"></div>
     <div class="sr-colors" id="colors"></div>
-    <a class="btn btn-accent" id="cfg-link" href="configurateur.html">Configurer ce produit <span class="arr">→</span></a>
+    <a class="btn btn-solid" id="cfg-link" href="configurateur.html">Configurer ce produit </a>
   </div>
 </main>
 <script type="module">
@@ -30,7 +30,7 @@
     murrideau: 'Façade vitrée structurelle à grille aluminium pour le tertiaire.',
     pergola: 'Pergola bioclimatique : lames orientables motorisées (animées ici).',
   };
-  const v = await createViewer(document.getElementById('showroom3d'), { background: '#0b0c0d', controls: true, autoRotate: true, zoom: true, camera: [2.6, 0.6, 3.8] });
+  const v = await createViewer(document.getElementById('showroom3d'), { background: '#e9e8e4', controls: true, autoRotate: true, zoom: true, camera: [2.6, 0.6, 3.8] });
   let finish = '#2b2d30', type = 'fenetre';
   const show = () => {
     const t = CATALOG.types.find(x => x.id === type);
@@ -46,6 +46,6 @@
   document.querySelectorAll('#colors button').forEach(b => b.onclick = () => { finish = b.dataset.hex; v.setFinish(finish); document.querySelectorAll('#colors button').forEach(x => x.classList.toggle('on', x === b)); });
   show();
 </script>
-<script src="assets/js/main.js" defer></script>
+<!--FOOTER-->
 </body>
 </html>

@@ -1,6 +1,6 @@
 # CRISTALU MAROC — site vitrine
 
-Site statique (HTML/CSS/JS vanilla, SEO friendly) + moteur 3D Three.js.
+Site institutionnel statique (HTML/CSS/JS vanilla) — charte dans `assets/css/site.css`, interactions dans `assets/js/site.js`.
 
 - `src/*.html` + `partials/` → `python3 build.py` génère les pages à la racine.
 - `assets/js/engine/viewer.js` — moteur 3D réutilisable (`createViewer`, `buildProduct`, `loadModel(glb)`, `setFinish`).
