@@ -75,3 +75,71 @@ $$('form[data-quote]').forEach(f => f.addEventListener('submit', e => {
 
 // Année
 $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
+
+/* ===== V2 dynamic animations ===== */
+document.body.insertAdjacentHTML('afterbegin', '<div class="progress-bar"></div>');
+const bar = $('.progress-bar');
+
+// Split titres en mots
+$$('.split, .section-head h2, .h-lg').forEach(el => {
+  if (el.dataset.splitDone) return; el.dataset.splitDone = 1;
+  el.classList.add('split'); el.classList.remove('reveal');
+  const walk = n => [...n.childNodes].forEach(c => {
+    if (c.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach(t => {
+        if (!t) return;
+        if (/^\s+$/.test(t)) { frag.append(' '); return; }
+        const w = document.createElement('span'); w.className = 'w'; w.innerHTML = '<span></span>'; w.firstChild.textContent = t; frag.append(w);
+      });
+      c.replaceWith(frag);
+    } else if (c.nodeType === 1) walk(c);
+  });
+  walk(el);
+  $$('.w>span', el).forEach((s, i) => s.style.transitionDelay = (i * 0.05) + 's');
+  io.observe(el);
+});
+// hero : révélation immédiate
+setTimeout(() => $$('.hero2 .split').forEach(e => e.classList.add('in')), 250);
+
+// Stagger des grilles
+$$('.features,.solutions,.quality-grid,.blog-grid,.stats').forEach(g => {
+  g.classList.add('stagger');
+  [...g.children].forEach((c, i) => { c.classList.remove('reveal'); c.style.transitionDelay = i * 0.08 + 's'; });
+  io.observe(g);
+});
+
+// Scroll loop : progression, cadre hero, marquee à vélocité, header auto-hide
+const frame = $('#heroFrame'), mtrack = $('.marquee-track');
+let lastY = scrollY, mx = 0, vel = 0;
+function frameLoop() {
+  const y = scrollY, dy = y - lastY; lastY = y;
+  bar.style.transform = `scaleX(${y / (document.documentElement.scrollHeight - innerHeight || 1)})`;
+  if (frame) {
+    const r = frame.getBoundingClientRect();
+    const p = Math.min(Math.max(1 - (r.top / (innerHeight * 0.8)), 0), 1);
+    frame.style.setProperty('--p', p.toFixed(3));
+  }
+  if (mtrack) {
+    vel += (dy - vel) * 0.1;
+    mx -= 0.6 + Math.abs(vel) * 0.4;
+    const half = mtrack.scrollWidth / 2; if (-mx > half) mx += half;
+    mtrack.style.transform = `translate3d(${mx}px,0,0) skewX(${Math.max(-8, Math.min(8, -vel * 0.3))}deg)`;
+  }
+  if (header && !document.body.classList.contains('menu-open')) header.classList.toggle('hidden', dy > 2 && y > 400 ? true : dy < -2 ? false : header.classList.contains('hidden'));
+  requestAnimationFrame(frameLoop);
+}
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(frameLoop);
+
+// Boutons magnétiques
+if (matchMedia('(hover:hover)').matches) $$('.btn').forEach(b => {
+  b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.25}px,${(e.clientY - r.top - r.height / 2) * 0.35}px)`; });
+  b.addEventListener('mouseleave', () => b.style.transform = '');
+});
+
+// Tilt léger sur les cartes produits
+if (matchMedia('(hover:hover)').matches) $$('.product').forEach(c => {
+  const img = c.querySelector('img,.pattern');
+  c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; img.style.transform = `scale(.97) perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`; });
+  c.addEventListener('mouseleave', () => img.style.transform = '');
+});
